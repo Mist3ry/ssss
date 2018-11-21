@@ -10,8 +10,8 @@ import time
 import logging
 import argparse
 
-session = requests.Session()
-session.trust_env = False
+#session = requests.Session()
+#session.trust_env = False
 logging.getLogger().setLevel(logging.DEBUG)
 
 def parse_arguments():
@@ -91,13 +91,12 @@ def make_post_request(host_ip, host_port, route, data=None):
     Returns:
       requests.models.Response: The HTTP response for the performed request
     """
-#    session = requests.Session()
-#    session.trust_env = False
+    session = requests.Session()
+    session.trust_env = False
 
     url = 'http://{0}:{1}/{2}'.format(host_ip, host_port, route)
     route_name = route.split('/')[0]
     logging.info('[{0}_topology_handler][url] {1}'.format(route_name, url))
-    print("before data")
     if data is None:
         post_call = session.post(url, timeout=None)
     else:
@@ -107,6 +106,7 @@ def make_post_request(host_ip, host_port, route, data=None):
             url,
             data=json.dumps(data),
             headers=headers, timeout=None)
+        print("after header headers")
     logging.info('[{0}_topology_handler][response status code] {1}'.
           format(route_name, post_call.status_code))
     logging.info('[{0}_topology_handler][response data] {1}'.
