@@ -10,7 +10,8 @@ import time
 import logging
 import argparse
 
-
+session = requests.Session()
+session.trust_env = False
 logging.getLogger().setLevel(logging.DEBUG)
 
 def parse_arguments():
@@ -90,12 +91,10 @@ def make_post_request(host_ip, host_port, route, data=None):
     Returns:
       requests.models.Response: The HTTP response for the performed request
     """
-    print("im in the make post")
-    session = requests.Session()
-    session.trust_env = False
+#    session = requests.Session()
+#    session.trust_env = False
 
     url = 'http://{0}:{1}/{2}'.format(host_ip, host_port, route)
-    print("still there")
     route_name = route.split('/')[0]
     logging.info('[{0}_topology_handler][url] {1}'.format(route_name, url))
     print("before data")
@@ -103,6 +102,7 @@ def make_post_request(host_ip, host_port, route, data=None):
         post_call = session.post(url, timeout=None)
     else:
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        print("after headers")
         post_call = session.post(
             url,
             data=json.dumps(data),
