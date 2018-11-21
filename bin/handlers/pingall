@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+"""Perform a pingall operation
+Command line handler to do a pingall in each one
+of the distributed topologies
+"""
+
+import util.multinet_requests as m_util
+
+
+def pingall_handler_main():
+    """Main
+    Send a POST request to the master 'ping_all' endpoint,
+    validate the response code and print the responses
+
+    Usage:
+      bin/handler/pingall --json-config <path-to-json-conf>
+
+    Example:
+      bin/handler/pingall --json-config config/runtime_config.json
+
+    Command Line Arguments:
+      json-config (str): Path to the JSON configuration file to be used
+    """
+    args = m_util.parse_arguments()
+    conf = m_util.parse_json_conf(args.json_config)
+    data = {'is_serial':args.is_serial}
+    res = m_util.master_cmd(conf['master_ip'],
+                            conf['master_port'],
+                            'ping_all', data)
+
+    m_util.handle_post_request(res, exit_on_fail=False)
+
+if __name__ == '__main__':
+    pingall_handler_main()
