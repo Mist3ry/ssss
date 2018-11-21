@@ -104,7 +104,6 @@ def make_post_request(host_ip, host_port, route, data=None):
         print("after headers")
         print(json.dumps(data))
         print(headers)
-        print(timeout)
         post_call = session.post(
             url,
             data=json.dumps(data),
