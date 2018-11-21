@@ -8,6 +8,7 @@ import json
 import util.multinet_requests as m_util
 import argparse
 import logging
+import time
 
 logging.getLogger().setLevel(logging.DEBUG)
 
@@ -28,11 +29,11 @@ def master_init_main():
     args = m_util.parse_arguments()
     conf = m_util.parse_json_conf(args.json_config)
     data = {'topo':conf['topo'], 'is_serial':args.is_serial}
+    time.sleep(.300)
     res = m_util.master_cmd(conf['master_ip'],
                             conf['master_port'],
                             'init',
                             data)
-    print res.headers
     m_util.handle_post_request(res, exit_on_fail=True)
 
 if __name__ == '__main__':
