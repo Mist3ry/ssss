@@ -30,9 +30,9 @@ def master_init_main():
     data = {'topo':conf['topo'], 'is_serial':args.is_serial}
     res = m_util.master_cmd(conf['master_ip'],
                             conf['master_port'],
-                            conf['init'],
+                            'init',
                             data)
-
+    print res.headers
     m_util.handle_post_request(res, exit_on_fail=True)
 
 if __name__ == '__main__':
