@@ -98,7 +98,8 @@ def make_post_request(host_ip, host_port, route, data=None):
     route_name = route.split('/')[0]
     logging.info('[{0}_topology_handler][url] {1}'.format(route_name, url))
     if data is None:
-        post_call = session.post(url, timeout=None)
+        post_call = session.post(url, timeout=20)
+#        post_call = session.post(url, timeout=None)
     else:
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         print("after headers")
@@ -107,7 +108,8 @@ def make_post_request(host_ip, host_port, route, data=None):
         post_call = session.post(
             url,
             data=json.dumps(data),
-            headers=headers, timeout=None)
+            headers=headers, timeout=20)
+#            headers=headers, timeout=None)
         print("after header headers")
     logging.info('[{0}_topology_handler][response status code] {1}'.
           format(route_name, post_call.status_code))
