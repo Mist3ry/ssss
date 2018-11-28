@@ -1,6 +1,6 @@
 {
   "worker_port_list": [3333, 3334], 
-  "master_ip": "127.0.0.1"
+  "master_ip": "127.0.0.1",
   "topo": 
   {
   "group_size": 1, 
