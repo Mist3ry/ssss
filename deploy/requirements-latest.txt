@@ -1,0 +1,16 @@
+bottle==0.12.16
+requests==2.21.0
+pyparsing==2.3.0
+tornado==5.1.1
+pytz==2018.9
+six==1.12.0
+stdeb==0.8.5
+dpkt==1.9.2
+collections-extended
+coveralls==1.5.1
+numpy==1.16.0
+paramiko==2.4.2
+cryptography==2.2.2
+gevent==1.4.0
+matplotlib==3.0.2
+lxml==4.3.0
