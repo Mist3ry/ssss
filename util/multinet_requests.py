@@ -10,8 +10,6 @@ import time
 import logging
 import argparse
 
-#session = requests.Session()
-#session.trust_env = False
 logging.getLogger().setLevel(logging.DEBUG)
 
 def parse_arguments():
