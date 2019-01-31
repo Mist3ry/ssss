@@ -99,18 +99,13 @@ def make_post_request(host_ip, host_port, route, data=None):
     logging.info('[{0}_topology_handler][url] {1}'.format(route_name, url))
     if data is None:
         post_call = session.post(url, timeout=None, verify=False)
-#        post_call = session.post(url, timeout=None)
+
     else:
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        print("after headers")
-        print(json.dumps(data))
-        print(headers)
         post_call = session.post(
             url,
             data=json.dumps(data),
             headers=headers, timeout=None, verify=False)
-#            headers=headers, timeout=None)
-        print("after header headers")
     logging.info('[{0}_topology_handler][response status code] {1}'.
           format(route_name, post_call.status_code))
     logging.info('[{0}_topology_handler][response data] {1}'.
@@ -132,7 +127,6 @@ def make_post_request_runner(host_ip, host_port, route, data, queue):
       data (str): Any additional JSON data
       queue (multiprocessing.Queue): The queue where all the responses are stored
     """
-    print("runner")
     queue.put(make_post_request(host_ip, host_port, route, data))
     return 0
 
@@ -146,7 +140,6 @@ def handle_post_request(post_call, exit_on_fail=True):
       post_call (requests.models.Response): The response to handle
       exit_on_fail (Optional[bool]): True -> Exit on error status code / False -> continue
     """
-    print("handle")
     failed_post_call = post_call['status_code'] >= 300 or post_call['status_code'] < 200
     if failed_post_call and exit_on_fail:
         sys.exit(post_call['status_code'])
